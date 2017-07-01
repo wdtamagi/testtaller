@@ -1,0 +1,27 @@
+<md-toolbar color="primary" style="width: 100%;">
+  <img style="padding-right: 15px;" src="assets/img/xurras_s_w.png"/>
+  <button md-button *ngIf="currentUser()" [routerLink]="['/']">
+    <md-icon>dashboard</md-icon>
+    DashBoard
+  </button>
+  <span style="flex: 1 1 auto;"></span>
+	<button *ngIf="currentUser()" md-icon-button [mdMenuTriggerFor]="menu">
+		<md-icon>more_vert</md-icon>
+	</button>
+	<md-menu #menu="mdMenu">
+		<button md-menu-item [routerLink]="['/register']">
+			<md-icon>face</md-icon>
+			<span>Minha Conta</span>
+		</button>
+		<button md-menu-item [routerLink]="['/login']">
+			<md-icon>exit_to_app</md-icon>
+			<span>Sair</span>
+		</button>
+	</md-menu>
+</md-toolbar>
+<div class="container">
+    <div class="col-sm-12">
+      <alert></alert>
+      <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div layout="column" layout-align="center center" style="padding-top: 100px;">
+	<md-toolbar *ngIf="model._id" color="primary" style="border-radius: 3px 3px 0 0;">
+    <span>Minha Conta</span>
+  </md-toolbar>
+	<md-toolbar *ngIf="!model._id" color="primary" style="border-radius: 3px 3px 0 0;">
+    <span>Registre-se</span>
+  </md-toolbar>
+	<md-card>
+    <md-card-content>
+			<form name="form" [formGroup]="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+					<div class="form-group">
+						<md-input-container style="width: 100%;">
+							<input mdInput color="primary" placeholder="E-mail" type="email" name="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.email" #email="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+							<md-error *ngIf="email.hasError('required')">
+								Campo obrigatório.
+							</md-error>
+							<md-error *ngIf="email.hasError('pattern')">
+								E-mail inválido.
+							</md-error>
+						</md-input-container>
+					</div>
+					<div class="form-group">
+						<md-input-container style="width: 100%;">
+							<input mdInput color="primary" placeholder="Senha" type="password" formControlName="senha" [formGroup]="form" [(ngModel)]="model.senha" required />
+							<md-error *ngIf="form.controls.senha.errors?.required">
+								Campo obrigatório.
+							</md-error>
+						</md-input-container>
+					</div>
+					<div class="form-group">
+						<md-input-container style="width: 100%;">
+							<input mdInput color="primary" placeholder="Repetir Senha" type="password" formControlName="repeat" [formGroup]="form" required />
+							<md-error *ngIf="form.controls.repeat.errors?.required">
+								Campo obrigatório.
+							</md-error>
+							<md-error *ngIf="form.controls.repeat.errors?.MatchPassword">
+								Senhas diferentes.
+							</md-error>
+						</md-input-container>
+					</div>
+					<div class="form-group" style="width: 100%;">
+						<button md-raised-button *ngIf="model._id" color="primary" [disabled]="loading" style="width: 100%;">
+							<md-spinner *ngIf="loading" style="float:left; width: 24px; height: 24px; margin: 5px 10px 0px 0px;"></md-spinner>
+							Salvar
+						</button>
+						<button md-raised-button *ngIf="!model._id" color="primary" [disabled]="loading" style="width: 100%;">
+							<md-spinner *ngIf="loading" style="float:left; width: 24px; height: 24px; margin: 5px 10px 0px 0px;"></md-spinner>
+							Registrar
+						</button>
+						<button md-raised-button color="warn" [routerLink]="['/']" style="width: 100%; margin-top: 5px;">Cancelar</button>
+					</div>
+			</form>
+		</md-card-content>
+  </md-card>
+</div>

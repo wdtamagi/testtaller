@@ -1,0 +1,26 @@
+<md-toolbar color="primary" style="width: 100%; position: fixed; top: 0px; left: 0px;">
+  <span *ngIf="empresa._id" style="color: white;">Detalhes da Empresa</span>
+  <span *ngIf="!empresa._id" style="color: white;">Nova Empresa</span>
+  <span style="flex: 1 1 auto;"></span>
+	<button md-button md-dialog-close style="color: white;">
+		<md-icon>close</md-icon>
+	</button>
+</md-toolbar>
+<div md-dialog-content class="row" style="width: 100%; height: 100%; padding-top: 70px;">
+  <form class="col-md-12">
+    <div class="form-group">
+      <md-input-container style="width: 100%;">
+        <input mdInput placeholder="Nome Fantasia" [(ngModel)]="empresa.nomeFantasia" [ngModelOptions]="{standalone: true}">
+      </md-input-container>
+    </div>
+    <div class="form-group">
+      <md-input-container style="width: 100%;">
+        <input mdInput placeholder="CNPJ" [(ngModel)]="empresa.cnpj" customMask="99.999.999/9999-99" [ngModelOptions]="{standalone: true}">
+      </md-input-container>
+    </div>
+  </form>
+</div>
+<div layout="row" layout-align="start center" style="text-align: center;" flex>
+  <button class="btn btn-primary" *ngIf="!empresa._id" (click)="createEmpresa(empresa)" style="width: 50%;">Criar</button>
+	<button class="btn btn-info" *ngIf="empresa._id" (click)="updateEmpresa(empresa)" style="width: 50%;">Atualizar</button>
+</div>

@@ -1,0 +1,37 @@
+<div layout="column" layout-align="center center" style="padding-top: 100px;">
+  <md-toolbar color="primary" style="border-radius: 3px 3px 0 0;">
+    <span>Login</span>
+  </md-toolbar>
+  <md-card>
+    <md-card-content>
+      <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+          <div class="form-group">
+            <md-input-container style="width: 100%;">
+              <input mdInput color="primary" placeholder="E-mail" type="email" name="text" [(ngModel)]="model.email" #email="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+              <md-error *ngIf="email.hasError('required')">
+                Campo obrigatório.
+              </md-error>
+              <md-error *ngIf="email.hasError('pattern')">
+                Porfavor digite um e-mail válido
+              </md-error>
+            </md-input-container>
+          </div>
+          <div class="form-group">
+            <md-input-container style="width: 100%;">
+              <input mdInput color="primary" placeholder="Senha" type="password" name="senha" [(ngModel)]="model.senha" #senha="ngModel" required />
+              <md-error>Campo obrigatório.</md-error>
+            </md-input-container>
+          </div>
+          <div class="form-group" style="width: 100%">
+						<button md-raised-button color="primary" [disabled]="loading" style="width: 100%">
+							<md-spinner *ngIf="loading" style="float:left; width: 24px; height: 24px; margin: 5px 10px 0px 0px;"></md-spinner>
+							Entrar
+						</button>
+          </div>
+					<div class="form-group">
+						<a color="primary" [routerLink]="['/register']" style="padding: 0px;">Ou registre-se aqui.</a>
+					</div>
+      </form>
+    </md-card-content>
+  </md-card>
+</div>

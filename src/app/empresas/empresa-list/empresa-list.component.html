@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2 style="text-align: center;">Empresas + Xurrasqueiras</h2>
+      <div class="col-sm-4"
+        *ngFor="let empresa of empresas | orderBy" style="padding-top: 10px">
+				<md-toolbar color="primary" style="border-radius: 3px 3px 0 0;">
+						<p style="text-align: center; color: white; width: 100%;">
+							{{empresa.nomeFantasia}}
+						</p>
+				</md-toolbar>
+				<md-card>
+					<md-card-header style="width: 100%;">
+						<md-card-subtitle style="width: 100%; text-align: center;">{{formatCNPJ(empresa.cnpj)}}</md-card-subtitle>
+					</md-card-header>
+					<md-card-content>
+						<p style="text-align: center;">
+							Quantidade de pedidos:
+						</p>
+						<p style="font-size: 5em; text-align: center;">
+							{{ empresa.pedidos ? empresa.pedidos.length : 0 }}
+						</p>
+					</md-card-content>
+					<button md-fab color="primary" mdTooltip="Visualizar pedidos" [mdTooltipPosition]="'left'" style="position: absolute; right: -11px; bottom: -3px;" (click)="visualizarPedidos(empresa)">
+            <md-icon>mode_edit</md-icon>
+          </button>
+				</md-card>
+      </div>
+  </div>
+</div>
+<button md-fab color="warn" mdTooltip="Novo pedido" [mdTooltipPosition]="'left'" style="position: fixed; right: 30px; bottom: 85px;" (click)="createNewPedido()">
+  <md-icon>shopping_cart</md-icon>
+</button>
+<button md-fab color="accent" mdTooltip="Adicionar nova empresa" [mdTooltipPosition]="'left'" style="position: fixed; right: 30px; bottom: 20px;" (click)="createNewEmpresa()">
+  <md-icon>business</md-icon>
+</button>
